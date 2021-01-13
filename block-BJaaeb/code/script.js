@@ -25,11 +25,10 @@ createInputElm('Your age', 'number'); //<label>Your age: <input type="number"></
 // Your code goes here
 
 function createInputElm(label, type = `text`) {
-  let labelElm = document.createElement('label');
-  let inputElm = document.createElement('input');
-  inputElm.type = `${type}`;
-  labelElm.append(`${label}:`, inputElm);
-  return labelElm;
+
+  let html = `<label>${label}: <input type="${type}"></label>`;
+  return html;
+
 }
 
 // TEST
@@ -67,22 +66,18 @@ createList(['Afghanistan', 'Antarctica', 'Congo', 'Estonia']);
 */
 
 function createTodoList(toDo) {
-  let ul = document.createElement('ul');
-  toDo.forEach(item => {
-    let li = document.createElement('li');
-    let p = document.createElement('p');
-    p.innerText = item.name;
-    let input = document.createElement('input');
-    input.type = 'checkbox';
-    input.checked = true;
-    input.name = '';
-    input.id = '';
-    let span = document.createElement('span');
-    span.innerText = 'X';
-    li.append(p, input, span);
-    ul.append(li);
-  });
-  return ul;
+  let html = `<ul> 
+  ${toDo.map(item => {
+    return `
+    <li>
+    <p>${item.name}</p>
+    <input type="checkbox" ${item.isDone ? "checked" : ""} name="" id="">
+    <span>X</span>
+    </li>
+    `
+  }).join('')}
+  </ul>`;
+  return html;
 }
 
 // Your code goes here
